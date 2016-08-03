@@ -267,12 +267,12 @@ Now that we completed the lab, we need to submit a **Pull request**.
 
 * Here we are getting to the directory:
 
-![locate](http://i.imgur.com/iGrbLIR.png)
+![locate](http://i.imgur.com/ADr9I0p.png?1)
 
 * Now type in the following command, `git status` and hit the return key.
 * You should see that there are some untracked files listed (somewhat like this):
 
-![untrack](http://i.imgur.com/0IObq1N.png)
+![untrack](http://i.imgur.com/FF5YNHN.png?1)
 
 * Think of this as the changes that were made locally (at your desk). Github isn't yet aware of these changes, Github is the server. So you need to now send these files back up to Github; that way they are now saved on the server. How do you do that?
 * We need to now go through a series of steps. Add these files (to a staging area), commit these files and then push these files up to Github.
@@ -281,7 +281,7 @@ Now that we completed the lab, we need to submit a **Pull request**.
 * Now type in `git push` or `git push master origin`. This will push up all these files that have been added and commited.
 * Here is what those steps looks like:
 
-![board](http://i.imgur.com/6KSQJhj.png)
+![board](http://i.imgur.com/7qKkv4y.png?1)
 
 * Github is now in sync with us. Nysnc.
 
@@ -289,25 +289,25 @@ Now that we completed the lab, we need to submit a **Pull request**.
 
 * So let's get back to Github! You should be here:
 
-![backhere](http://i.imgur.com/cLBmZIM.png)
+![backhere](http://i.imgur.com/Ltvpjwl.png?1)
 
 * Towards the left-middle of the page, you should see a gray button labeled "New pull request". Click that button. You should be brought to a screen that looks like this:
 
 
-![buttonTap](http://i.imgur.com/P2addd3.png)
+![buttonTap](http://i.imgur.com/rs9tSOz.png?1)
 
 * The most relevant information here is at the top:
 
-![relevant](http://i.imgur.com/b6XcnhP.png)
+![relevant](http://i.imgur.com/MuZbus3.png?1)
 
 * We want to click the "Create pull request" button here. This is getting us closer to submitting our exam back to the teacher. This is the start of that process.
 * When you click "Create pull request", you should be presented with the following screen:
 
-![screenj](http://i.imgur.com/yYahKkm.png)
+![screenj](http://i.imgur.com/VFX1Byw.png?1)
 
 * Our final step.. you now need to click the "Create pull request" button presented here. After doing so, you are done! You should see the following screen (but don't click "Merge pull request").
 
-![completeo](http://i.imgur.com/j3rvKAQ.png)
+![completeo](http://i.imgur.com/Xe74LOf.png?1)
 
 ---
 
@@ -315,17 +315,10 @@ Now that we completed the lab, we need to submit a **Pull request**.
 
 * You should see lovely green lights now in place of an empty circle on our liste of instructions.
 
-![joy](http://i.imgur.com/T1Yor3a.png)
-
-![morejoy](http://i.imgur.com/eXL32W0.png)
-
-* After click the "I'm done" button, we should be presented with the following:
-
-![doneas](http://i.imgur.com/8oJp0jH.png)
+![joy](http://i.imgur.com/dN1P3vk.png?1)
 
 
-
-Note: There are some labs that include tests (the one you're about to complete below is one of them). They might include an additional circle (that can be lit green) that states that you need to Pass The Tests. When the tests pass within Xcode, the appropriate circle (on learn) should light up green.
+Note: There are some labs that include tests (the one we just completed included them). They might include an additional circle (that can be lit green) that states that you need to Pass The Tests. When the tests pass within Xcode, the appropriate circle (on learn) should light up green.
 
 * In order for Xcode to be able to communicate with Learn to let Learn know that the all of your tests passed when completing a lab, you need to type the following command in Terminal.
 
@@ -335,138 +328,18 @@ Note: There are some labs that include tests (the one you're about to complete b
 
 ![completeSetup](http://i.imgur.com/OBX76qT.png)
 
+* When that is complete, you should also type the following in Terminal
 
-* After this installation is complete, you are good to go!
+`gem update learn-xcpretty
+`
 
-* It's time to give a shot beginning with the Learning Objectives below. Your ride has begun.. hold on and good luck!
+![](http://i.imgur.com/U4e9h61.png?1)
 
-# Now that you know how to work with the various labs throughout this course, it's time to actually complete one. One that involves tests!
+* In my case, I have it already installed. Now you should be able to go back to Xcode, hit command + u to run the tests then go back to learn to see if the Run Local tests light has lit up. If at this point, it's still not lighting up for you and yet your tests are passing, just raise an issue within Learn and carry onto the next lesson.
 
-![reaction](https://media.giphy.com/media/NIvUx6LX6w3lu/giphy.gif)
 
 ---
 
-# Hello Universe - Lab
-
-## Learning Objectives
-
-* Submit your first lab.
-* Understand how to read instructions for a lab.
-
----
-
-
-## Instructions
-
-The name of this lab is **Hello Universe**. This doesn't mean much really, it's just the name we gave the lab. Sometimes it relates to the theme of the lab (in that this lab asks you to create a function that greets the universe), sometimes it just relates to the topic.
-
-First things first, fork & clone this lab down to your computer. Preferably in a Developer folder on your hard-drive. Don't just clutter up your Desktop, you will be going through a ton of labs throughout this course.
-
-See the steps above on how to fork & clone this lab above.
-
-This lab involves tests.
-
-The tests are written by us (when we create the lab). These tests are there to guide you along the way and make sure that you're implementing the functions correctly.
-
-To run the tests within Xcode, press command + u. When you first open up an Xcode file, if you find that you're getting some warning about not having Quick or Nimble, press command + u to see if that will fix the error.
-
-### Step 1:
-
-Open up the `HelloUniverse.xcworkspace` file. Make sure you're opening the `HelloUniverse.xcworkspace` file and _not_ the `HelloUniverse.xcodeproj` file. The reason for this, is that we have included tests in this lab. We write these tests using libraries written by 3rd Parties (open source!). We're able to utilize multiple frameworks within one Xcode file by working within a `*.xcworkspace` file.
-
-After opening the `HelloUniverse.xcworkspace` file, you should see something like this:
-
-![](http://i.imgur.com/2jIIFq5.png?1)
-
-### Step 2:
-
-Where it states `// Implement your function here`, that is where you will be writing your code.  
-  
-Create a function called `helloUniverse()` that takes in no arguments and returns back a `String`. The `String` that should be returned is "Hello Universe!". 
-
-**Answer**: 
-
-```swift
-func helloUniverse() -> String {
-   return "Hello Universe!"
-}
-```
-
-After pasting the answer into Xcode, it should look like this:
-
-![](http://i.imgur.com/d9Pmyci.png?1)
-
-### Step 3:
-
-We need to run the tests. You do that by pressing cmd + u. This will run the tests within Xcode. The tests written are checking to see that you implemented both the `helloUniverse()` function correctly.
-
-To see the tests for yourself, locate the `GreetingTest.swift` file like so:
-
-Locate the `GreetingTest.swift` file in the Project navigator, like so:
-
-![](http://i.imgur.com/ZL1XYGE.png?1)
-
-Line 17 & 18 can be read be read like a sentence. Describe "helloUniverse()", it should take in no arguments.." These two lines of code break down how you should implement this particular function. Generally, this description is usually identical to how the instructions are asking you to implement the function.
-
-Line 20 - we're create a new constant to what the answer should be.
- 
-Line 21 - we're creating a new constant calling on the function _you_ implemented and storing that response back in the `actualResponse` constant.
-
-Line 23 - This is the test doing its thing. It's expecting both `expectedResponse` and `actualResponse` to be equal.
-
-Lets run the tests and see what happens.
-
-**Press command + u**
-
-![](http://i.imgur.com/JbYzhTc.png?1)
-
-Notice on line 10, I have a green check mark. That means I implemented the functions correctly! What happens if we didn't implement the functions correctly, what would happen?
-
-Lets check it out.
-
-Going back to the `Greeting.swift` file, I've changed the implementation of the `helloUniverse()` function to look like this:
-
-```swift
-func helloUniverse() -> String {
-   return "Hello Universe ^_^"
-}
-```
-
-If I was to now run the tests, the tests should not pass. They should fail.
-
-![](http://i.imgur.com/iqMK9OP.png?1)
-
-The most important piece of information is on line 23
-
-![](http://i.imgur.com/Cj2C5Az.png?1)
-
-It's letting us know that the test was expecting "Hello Universe!" but it got "Hello Universe ^_^" instead.
-
-Sometimes though, within the test file (in this lab, the test file is `GreetingTest.swift`), it will not show you what function wasn't implemented correctly. If this happens, you can do the following
-
-Locate the Test navigator button along the top (you can see it highlighted in blue here, it looks like a diamond). After doing so, scroll down to the GreetingSpec section, locate any of the tests there, right click it and click "Jump to Report".
-
-![](http://i.imgur.com/wdQcgRr.png?1)
-
-
-After doing that, you should be brought here:
-
-![](http://i.imgur.com/6bK8DJM.png?1)
-
-You can see the most important part in red there. You might prefer to see your test results this way as it can break it all down into neat chunks.
-
-
-### Step 4:
-
-Fix the `helloUniverse()` function so it's back to normal,
-
-```swift
-func helloUniverse() -> String {
-   return "Hello Universe!"
-}
-```
-
-After doing so, you've completed your first lab. Go through the necessary steps within terminal of adding, committing and pushing up your work. When that is complete, you need to then submit a pull request from Github and you can move onto the next lesson. If you need help with these steps, see above on how to go about doing this.
 
 
 
