@@ -12,7 +12,7 @@
 
 To begin making apps for iOS, MacOS, WatchOS, tvOS, you need to setup your [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment). 
 * Download Xcode [here](https://itunes.apple.com/us/app/xcode/id497799835?mt=12). Xcode is a piece of Software (written by Apple, Inc.) which we write our code in. Xcode is able to compile and run this code (apps!). You can read more about Xcode [here](https://developer.apple.com/xcode/ide/). Later on we will be going over how you will be using Xcode and the parts of Xcode most important for you to start your journey and begin coding!
-* You're required to download Xcode from the Mac App Store. So, after clicking the "View In mac App Store" link you should be directed to the Mac App Store where you can download the application.
+* You're required to download Xcode from the Mac App Store. So, after clicking the "View In mac App Store" link (see screenshot below) you should be directed to the Mac App Store where you can download the application.
 
 ![Xcode Link](http://i.imgur.com/GJitSSJ.png)
 
@@ -54,18 +54,16 @@ To begin making apps for iOS, MacOS, WatchOS, tvOS, you need to setup your [IDE]
 
 ## 3. Setting up the lab
 
-* Here's an example of what a lab looks like in learn.
+* Lets step through solving a lab together. Scroll to the top of the page like so:
 
-![Learn Lab](http://i.imgur.com/vr0B9Lg.png)
+![](http://i.imgur.com/55YJ1BY.png?1)
+
 
 * In the right pane, you can see that there are some tasks to be completed before we can click next lesson.
-
-![right pane](http://i.imgur.com/GukB8BM.png)
-
-
-* The most important steps:
 	* Fork this Lab
+	* Run Local Tests
 	* Submit Pull Request
+
 
 ### Fork this lab
 
@@ -76,26 +74,26 @@ To begin making apps for iOS, MacOS, WatchOS, tvOS, you need to setup your [IDE]
 
 * When you tap that button/link, you should be directed to a page that looks like this:
 
-![GitHub Lab](http://i.imgur.com/WDEeReM.png)
+![GitHub Lab](http://i.imgur.com/Gz74eYS.png?1)
 
 
 * Well, that looks familiar. Sticking with our analogy, we've found our way to the original copy of the exam! What we were looking at before was Learn taking this exact file and presenting it to you in its own way. 
 * If you look hard enough on this page, you should find the Fork button in the upper right corner of the screen below your profile image.
 * When you tap the Fork button, you should be presented with the following screen:
 
-![ForkTap](http://i.imgur.com/aMuJHhR.png)
+![ForkTap](http://i.imgur.com/0a1JvcQ.png?1)
 
 * Sticking with our analogy, we want to take back a copy of this exam (lab) back to our desk. That is what Github is asking us now, which desk? We want to bring it back to our desk, so click your account here. My account here is the upper left one.
 
 * As soon as you tap your account here, you should be presented with the following screen. It might come and go VERY fast (where you barely see it), but this is what it looks like:
 
-![Loading](http://i.imgur.com/Ehm4rsV.png)
+![Loading](http://i.imgur.com/6D0Y5ZO.png?1)
 
 * It's got a picture of a fork, a book and a photocopy machine, Github is also using our analogy!. Here, we are forking (or creating a copy) of the repository (lab) and having our own version of this repository (lab) on our account.
 
 * When that is complete, we should be brought to a screen that looks like this :
 
-![finalScreen](http://i.imgur.com/oT7AbGt.png)
+![finalScreen](http://i.imgur.com/iUj6ehB.png?1)
 
 * That looks familiar too! We now have our repository (exam) where we can begin working! Not so fast. We have our own version of this repository stored on our account on Github, but we need to now bring down these various files associated with the repository to our local machine (the computer you're sitting at!). 
 * Once these files associated with this repository are downloaded to our computer, we can open the necessary files the instructions tell us to open and begin writing code!
@@ -103,11 +101,11 @@ To begin making apps for iOS, MacOS, WatchOS, tvOS, you need to setup your [IDE]
 * First things first, this next step isn't *required*, but we do **HIGHLY** suggest it, and that's generating an SSH Key. This will allow for you to clone (download) these files down to your computer without forcing you to enter in your Username & Password (for github) every single time. This will save you a lot of time. You can read about how you can set up your SSH Key [here](https://help.github.com/articles/generating-an-ssh-key/).
 * Then click the green "Clone or download" button in the right-center of the Github page. 
 
-![Clone](http://i.imgur.com/zAeFK5k.png)
+![Clone](http://i.imgur.com/18eFeXU.png?1)
 
 * What we're most concerned with now is the link presented to the left of the copy clipboard icon.
 
-![clipboard](http://i.imgur.com/egP0cA0.png)
+![clipboard](http://i.imgur.com/0OVoQar.png?1)
 
 * Copy this link by either clicking the Copy Clipboard Item or highlighting over the link presented and copying it.
 * Now we need to open Terminal.
@@ -132,12 +130,12 @@ To begin making apps for iOS, MacOS, WatchOS, tvOS, you need to setup your [IDE]
 * In terminal, type out `git clone`
 * After putting a space after `git clone`, paste in what you had just copied earlier (the link you had copied from the prior instruction). After doing so, you should see this:
 
-![cloney](http://i.imgur.com/SDhXmM7.png)
+![cloney](http://i.imgur.com/il55Vqv.png?1)
 * Now hit your return key.
 
 * You should see some commands being run in Terminal at this point. Afterwards you should see the following:
 
-![thing](http://i.imgur.com/pYo0oZL.png)
+![thing](http://i.imgur.com/vcCsqOV.png?1)
 
 * If you see something similar to what is displayed in the screenshot above, we have succesfully cloned down the repository to our computer. We can begin working!
 
@@ -152,45 +150,114 @@ To begin making apps for iOS, MacOS, WatchOS, tvOS, you need to setup your [IDE]
 
 * Open you terminal. We need to get in this newly created directory we cloned from the instructions above. To get to the directory that you're in, use the `cd` command. 
 
-![findintIt](http://i.imgur.com/7gGMBtB.png)
+![findintIt](http://i.imgur.com/lBXfQvv.png?1)
 
 * Auto-complete should make your life very easy here. You can begin to type swift after the `cd` command and then hit your tab button on your keyboard. When doing so, you should see it begin to auto-complete that above line for you. After then hitting return, we are in our newly made directory (the lab).
 
 * After entering your directory, you can type `ls` to see what's inside. (`ls` is a command that will list all the files and folders that are in the particular directory that you're in.) 
 
-![dirin](http://i.imgur.com/x5PKgid.png)
+![dirin](http://i.imgur.com/0si02mC.png?1)
 
 * There are a bunch of files, the same ones we were able to see when we first forked the lab.
-* We generally write our code in a few files. Here (in this example), we need to open the `Interface Builder Tour.xcodeproj` file. The lab should instruct you on what file to open (usually). If not, in general it's either going to be the `.xcodeproj` file or the `.xcworkspace` file.
+* We generally write our code in a few files. Here (in this example), we need to open the `HelloUniverse.xcworkspace` file. The lab should instruct you on what file to open (usually). If not, in general it's either going to be the `.xcodeproj` file or the `.xcworkspace` file.
 
-* We want to begin by typing `open` in Terminal, followed by `Interface Builder Tour.xcodeproj`. Auto-complete is your friend. Don't forget when beginning to type Interface, you can hit the tab key to help complete it.
+* We want to begin by typing `open` in Terminal, followed by `HelloUniverse.xcworkspace`. Auto-complete is your friend. Don't forget when beginning to type Interface, you can hit the tab key to help complete it.
 * Then hit return, it should open Xcode up for you.
 
-![return](http://i.imgur.com/4wEBkQT.png)
+![return](http://i.imgur.com/AqL1hWk.png?1)
 
 * Xcode should now be displayed on screen like so:
 
-![Xcode](http://i.imgur.com/uGJTysc.png)
+![Xcode](http://i.imgur.com/gEocyMt.png?1)
 
-* In the left pane is where you should see various files. The instructions for each lab should direct you to the file where you should be writing your code. For instance, we will select the `ViewController.swift` file. After doing so, Xcode will look like this:
+* In the left pane is where you should see various files. The instructions for each lab should direct you to the file where you should be writing your code. For instance, we will select the `Greeting.swift` file. After doing so, Xcode will look like this:
 
-![Xcodeagain](http://i.imgur.com/3iZ2cPI.png)
+![Xcodeagain](http://i.imgur.com/wGKQGhX.png?1)
 
-* Here we are removing a function and adding some code to the `viewDidLoad()` function.
+Where it states `// Implement your function here`, that is where you will be writing your code.  
+  
+Create a function called `helloUniverse()` that takes in no arguments and returns back a `String`. The `String` that should be returned is "Hello Universe!". 
 
-![writingCode](http://i.imgur.com/8qpp25q.png)
-
-* Lets pretend as if the instructions for this lab were for us to create a function called `sayHello()` that would just print out the following statement, "Hello everyone!". Let's do that.
-
-![finished](http://i.imgur.com/qvmiaKb.png)
+**Answer**: 
 
 ```swift
-func sayHello() {
-    print("Hello everyone!")     
+func helloUniverse() -> String {
+   return "Hello Universe!"
 }
 ```
 
-* Now that we completed the lab, we need to submit a **Pull request**.
+After pasting the answer into Xcode, it should look like this:
+
+![](http://i.imgur.com/d9Pmyci.png?1)
+
+
+We need to run the tests. You do that by pressing cmd + u. This will run the tests within Xcode. The tests written are checking to see that you implemented the `helloUniverse()` function correctly.
+
+To see the tests for yourself, locate the `GreetingTest.swift` file like so:
+
+Locate the `GreetingTest.swift` file in the Project navigator, like so:
+
+![](http://i.imgur.com/ZL1XYGE.png?1)
+
+Line 17 & 18 can be read be read like a sentence. Describe "helloUniverse()", it should take in no arguments.." These two lines of code break down how you should implement this particular function. Generally, this description is usually identical to how the instructions are asking you to implement the function.
+
+Line 20 - we're create a new constant to what the answer should be.
+ 
+Line 21 - we're creating a new constant calling on the function _you_ implemented and storing that response back in the `actualResponse` constant.
+
+Line 23 - This is the test doing its thing. It's expecting both `expectedResponse` and `actualResponse` to be equal.
+
+Lets run the tests and see what happens.
+
+**Press command + u**
+
+![](http://i.imgur.com/JbYzhTc.png?1)
+
+Notice on line 10, I have a green check mark. That means I implemented the functions correctly! What happens if we didn't implement the functions correctly, what would happen?
+
+Lets check it out.
+
+Going back to the `Greeting.swift` file, I've changed the implementation of the `helloUniverse()` function to look like this:
+
+```swift
+func helloUniverse() -> String {
+   return "Hello Universe ^_^"
+}
+```
+
+If I was to now run the tests, the tests should not pass. They should fail.
+
+![](http://i.imgur.com/iqMK9OP.png?1)
+
+The most important piece of information is on line 23
+
+![](http://i.imgur.com/Cj2C5Az.png?1)
+
+It's letting us know that the test was expecting "Hello Universe!" but it got "Hello Universe ^_^" instead.
+
+Sometimes though, within the test file, it will not show you what function wasn't implemented correctly. If this happens, you can do the following
+
+Locate the Test navigator button along the top (you can see it highlighted in blue here, it looks like a diamond). After doing so, scroll down to the GreetingSpec section, locate any of the tests there, right click it and click "Jump to Report".
+
+![](http://i.imgur.com/wdQcgRr.png?1)
+
+
+After doing that, you should be brought here:
+
+![](http://i.imgur.com/6bK8DJM.png?1)
+
+You can see the most important part in red there. You might prefer to see your test results this way as it can break it all down into neat chunks.
+
+
+
+Fix the `helloUniverse()` function so it's back to normal,
+
+```swift
+func helloUniverse() -> String {
+   return "Hello Universe!"
+}
+```
+Now that we completed the lab, we need to submit a **Pull request**.
 
 ---
 
