@@ -28,3 +28,11 @@ cd ${CURR_DIR}
 
 
 curl -s -H "Content-Type: application/json" -X POST --data "{ \"username\": \"${GITHUB_USERNAME}\", \"github_user_id\": \"${GITHUB_USER_ID}\", \"repo_name\": \"${REPO_NAME}\", \"build\": { \"test_suite\": [{\"framework\": \"xcpretty\", \"formatted_output\": [], \"duration\": 0.0, \"build_output\": []}]}, \"total_count\": ${TOTAL_COUNT}, \"passing_count\": ${PASSING_COUNT}, \"failure_count\": ${FAILURE_COUNT}}" "${SERVICE_URL}${SERVICE_ENDPOINT}"
+
+
+
+
+
+
+
+
