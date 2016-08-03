@@ -7,7 +7,6 @@
 
 class Greeting {
     
-    func helloUniverse() -> String {
-        return "Hello Universe!"
-    }
+    // Implement your function here
+    
 }
