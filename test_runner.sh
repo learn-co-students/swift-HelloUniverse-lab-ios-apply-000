@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-exec > /Users/JimCampagnoFIS/Desktop/working/my_log_file.txt 2>&1
 SERVICE_URL='http://ironbroker.flatironschool.com'
 SERVICE_ENDPOINT='/e/flatiron_xcpretty'
 CURR_DIR="$2"
