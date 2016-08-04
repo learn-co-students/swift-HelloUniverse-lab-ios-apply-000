@@ -283,7 +283,7 @@ Now that we completed the lab, we need to submit a **Pull request**.
 
 ![board](http://i.imgur.com/7qKkv4y.png?1)
 
-* Github is now in sync with us. Nysnc.
+* Github is now in sync with us. ☆NSYNC.
 
 ![justin](https://media.giphy.com/media/TsrC3a7hr9Z8k/giphy.gif)
 
@@ -344,3 +344,5 @@ Note: There are some labs that include tests (the one we just completed included
 
 
 <a href='https://learn.co/lessons/FirstLab' data-visibility='hidden'>View this lesson on Learn.co</a>
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/swift-HelloUniverse-lab'>Hello Universe Lab</a> on Learn.co and start learning to code for free.</p>
