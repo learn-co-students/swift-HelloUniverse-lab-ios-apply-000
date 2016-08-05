@@ -328,21 +328,7 @@ Note: There are some labs that include tests (the one we just completed included
 
 ![completeSetup](http://i.imgur.com/OBX76qT.png)
 
-* When that is complete, you should also type the following in Terminal
-
-`gem update learn-xcpretty
-`
-
-![](http://i.imgur.com/U4e9h61.png?1)
-
-* In my case, I have it already installed. Now you should be able to go back to Xcode, hit command + u to run the tests then go back to learn to see if the Run Local tests light has lit up. If at this point, it's still not lighting up for you and yet your tests are passing, just raise an issue within Learn and carry onto the next lesson.
-
-
 ---
 
-
-
-
-<a href='https://learn.co/lessons/FirstLab' data-visibility='hidden'>View this lesson on Learn.co</a>
 
 <p class='util--hide'>View <a href='https://learn.co/lessons/swift-HelloUniverse-lab'>Hello Universe Lab</a> on Learn.co and start learning to code for free.</p>
