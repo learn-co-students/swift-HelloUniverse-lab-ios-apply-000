@@ -10,6 +10,8 @@ import Foundation
 
 class Greeting {
     
-    // Implement your function here
-    
+    func helloUniverse() -> String {
+        return "Hello Universe!"
+    }
+
 }
