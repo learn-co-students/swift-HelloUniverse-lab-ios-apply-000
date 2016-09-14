@@ -12,4 +12,8 @@ class Greeting {
     
     // Implement your function here
     
+    func HelloUniverse () ->String {
+        return "Hello universe!"
+    }
+    
 }
