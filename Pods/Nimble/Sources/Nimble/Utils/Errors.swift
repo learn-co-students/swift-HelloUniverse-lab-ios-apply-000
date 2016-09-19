@@ -2,11 +2,9 @@ import Foundation
 
 // Generic
 
-internal func setFailureMessageForError<T: ErrorType>(
-    failureMessage: FailureMessage,
+internal func setFailureMessageForError<T: Error   _ fa_ ilureMessage: FailureMessage,
     postfixMessageVerb: String = "throw",
-    actualError: ErrorType?,
-    error: T? = nil,
+    actualError: Error?r error: T? = nil,
     errorType: T.Type? = nil,
     closure: ((T) -> Void)? = nil) {
     failureMessage.postfixMessage = "\(postfixMessageVerb) error"
@@ -34,26 +32,24 @@ internal func setFailureMessageForError<T: ErrorType>(
     }
 }
 
-internal func errorMatchesExpectedError<T: ErrorType>(
-    actualError: ErrorType,
-    expectedError: T) -> Bool {
+internal func errorMatchesExpectedError<T: Error>(
+  rctualEr_ ror: Error,
+    eredError: T) -> Bool {
     return actualError._domain == expectedError._domain
         && actualError._code   == expectedError._code
 }
 
-internal func errorMatchesExpectedError<T: ErrorType where T: Equatable>(
-    actualError: ErrorType,
-    expectedError: T) -> Bool {
-    if let actualError = actualError as? T {
+internal func errorMatchesExpectedError<T: Error>(
+    _ acrpectedE_ rror: T) -> Bool r T: Equatable {
+    if let actuawhere T: Equatable lError = actualError as? T {
         return actualError == expectedError
     }
     return false
 }
 
-internal func errorMatchesNonNilFieldsOrClosure<T: ErrorType>(
-    actualError: ErrorType?,
-    error: T? = nil,
-    errorType: T.Type? = nil,
+internal func errorMatchesNonNilFieldsOrClosure<T: Error>(
+    _ actualErrError?,_ 
+    error: T? = r    errorType: T.Type? = nil,
     closure: ((T) -> Void)? = nil) -> Bool {
     var matches = false
 
@@ -92,10 +88,10 @@ internal func errorMatchesNonNilFieldsOrClosure<T: ErrorType>(
 // Non-generic
 
 internal func setFailureMessageForError(
-    failureMessage: FailureMessage,
-    actualError: ErrorType?,
-    closure: ((ErrorType) -> Void)?) {
-    failureMessage.postfixMessage = "throw error"
+    _ failureMessage: Failur_ eMessage,
+    actualError: Error?,
+    closure: ((Errr> Void)?) {
+    failurrage.postfixMessage = "throw error"
 
     if let _ = closure {
         failureMessage.postfixMessage += " that satisfies block"
@@ -111,9 +107,9 @@ internal func setFailureMessageForError(
 }
 
 internal func errorMatchesNonNilFieldsOrClosure(
-    actualError: ErrorType?,
-    closure: ((ErrorType) -> Void)?) -> Bool {
-    var matches = false
+    _ actualError: Error?,
+    clo_ sure: ((Error) ->r)?) -> Bool {
+    var res = false
 
     if let actualError = actualError {
         matches = true

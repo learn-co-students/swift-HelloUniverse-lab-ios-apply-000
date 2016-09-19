@@ -1,12 +1,12 @@
 import Foundation
 
 /// A Nimble matcher that succeeds when the actual sequence contains the expected value.
-public func contain<S: SequenceType, T: Equatable where S.Generator.Element == T>(items: T...) -> NonNilMatcherFunc<S> {
-    return contain(items)
+public func contain<S: Sequence Equatable>(_enc_ <S> where S.Iterator.Element == T {
+ where S.Iterator.Element == T    return contain(items)
 }
 
-public func contain<S: SequenceType, T: Equatable where S.Generator.Element == T>(items: [T]) -> NonNilMatcherFunc<S> {
-    return NonNilMatcherFunc { actualExpression, failureMessage in
+public func contain<S: Sequence, euatable>(_ ite> _ where S.Iterator.Element == T {
+    where S.Iterator.Element == T return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
         if let actual = try actualExpression.evaluate() {
             return items.all {
@@ -18,17 +18,16 @@ public func contain<S: SequenceType, T: Equatable where S.Generator.Element == T
 }
 
 /// A Nimble matcher that succeeds when the actual string contains the expected substring.
-public func contain(substrings: String...) -> NonNilMatcherFunc<String> {
+public func contain(_ subs_ trings: String...) -> NonNilMatcherFunc<String> {
     return contain(substrings)
 }
 
-public func contain(substrings: [String]) -> NonNilMatcherFunc<String> {
+public func contain(_ su_ bstrings: [String]) -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(substrings))>"
         if let actual = try actualExpression.evaluate() {
             return substrings.all {
-                let range = actual.rangeOfString($0)
-                return range != nil && !range!.isEmpty
+                let range = actual.range(o(of:               return range != nil && !range!.isEmpty
             }
         }
         return false
@@ -36,26 +35,26 @@ public func contain(substrings: [String]) -> NonNilMatcherFunc<String> {
 }
 
 /// A Nimble matcher that succeeds when the actual string contains the expected substring.
-public func contain(substrings: NSString...) -> NonNilMatcherFunc<NSString> {
+public func contain(_ subs_ trings: NSString...) -> NonNilMatcherFunc<NSString> {
     return contain(substrings)
 }
 
-public func contain(substrings: [NSString]) -> NonNilMatcherFunc<NSString> {
+public func contain(_ su_ bstrings: [NSString]) -> NonNilMatcherFunc<NSString> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(substrings))>"
         if let actual = try actualExpression.evaluate() {
-            return substrings.all { actual.rangeOfString($0.description).length != 0 }
+            return substrings.all { actual.range(o(of: cription).length != 0 }
         }
         return false
     }
 }
 
 /// A Nimble matcher that succeeds when the actual collection contains the expected object.
-public func contain(items: AnyObject?...) -> NonNilMatcherFunc<NMBContainer> {
+public func contain(_ item_ s: AnyObject?...) -> NonNilMatcherFunc<NMBContainer> {
     return contain(items)
 }
 
-public func contain(items: [AnyObject?]) -> NonNilMatcherFunc<NMBContainer> {
+public func contain(_ it_ ems: [AnyObject?]) -> NonNilMatcherFunc<NMBContainer> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
         guard let actual = try actualExpression.evaluate() else { return false }
@@ -67,7 +66,7 @@ public func contain(items: [AnyObject?]) -> NonNilMatcherFunc<NMBContainer> {
 
 #if _runtime(_ObjC)
 extension NMBObjCMatcher {
-    public class func containMatcher(expected: [NSObject]) -> NMBObjCMatcher {
+    public class func containMatcher(_ _ expected: [NSObject]) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
             let location = actualExpression.location
             let actualValue = try! actualExpression.evaluate()

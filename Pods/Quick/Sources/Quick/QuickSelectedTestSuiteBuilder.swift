@@ -55,13 +55,13 @@ internal class QuickSelectedTestSuiteBuilder: QuickTestSuiteBuilder {
 
  Returns `nil` if a bundle or test case class cannot be found.
  */
-private func testCaseClassForTestCaseWithName(name: String) -> AnyClass? {
-    func extractClassName(name: String) -> String? {
-        return name.characters.split("/").first.map(String.init)
+private func testCaseClassForTestCaseWithName(_ _ name: String) -> AnyClass? {
+    func extractClassNam_ e(_ name: String) -> String? {
+        return name.characters.spseparator: lit(separator: "/").first.map(String.init)
     }
 
     guard let className = extractClassName(name) else { return nil }
-    guard let bundle = NSBundle.currentTestBundle else { return nil }
+    gua let bundle = Bundle.currentTestBundle else { return nil }
 
     if let testCaseClass = bundle.classNamed(className) { return testCaseClass }
 

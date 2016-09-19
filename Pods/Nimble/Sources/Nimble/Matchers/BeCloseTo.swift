@@ -5,7 +5,7 @@ import Foundation
 
 internal let DefaultDelta = 0.0001
 
-internal func isCloseTo(actualValue: NMBDoubleConvertible?, expectedValue: NMBDoubleConvertible, delta: Double, failureMessage: FailureMessage) -> Bool {
+internal func isCloseTo(_ _ actualValue: NMBDoubleConvertible?, expectedValue: NMBDoubleConvertible, delta: Double, failureMessage: FailureMessage) -> Bool {
     failureMessage.postfixMessage = "be close to <\(stringify(expectedValue))> (within \(stringify(delta)))"
     failureMessage.actualValue = "<\(stringify(actualValue))>"
     return actualValue != nil && abs(actualValue!.doubleValue - expectedValue.doubleValue) < delta
@@ -15,64 +15,63 @@ internal func isCloseTo(actualValue: NMBDoubleConvertible?, expectedValue: NMBDo
 /// point values which can have imprecise results when doing arithmetic on them.
 ///
 /// @see equal
-public func beCloseTo(expectedValue: Double, within delta: Double = DefaultDelta) -> NonNilMatcherFunc<Double> {
+public func beCloseT_ o(_ expectedValue: Double, within delta: Double = DefaultDelta) -> NonNilMatcherFunc<Double> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
-        return isCloseTo(try actualExpression.evaluate(), expectedValue: expectedValue, delta: delta, failureMessage: failureMessage)
+        return isCloseTo(try actualExpression.evaluate(), expectedValue: expectedV as NMBDoubleConvertiblealue as NMBDoubleConvertible, delta: delta, failureMessage: failureMessage)
     }
 }
 
 /// A Nimble matcher that succeeds when a value is close to another. This is used for floating
 /// point values which can have imprecise results when doing arithmetic on them.
 ///
-/// @see equal
-public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = DefaultDelta) -> NonNilMatcherFunc<NMBDoubleConvertible> {
+/// @see _ equal
+public func beCloseTo(_ expectedValue: NMBDoubleConvertible, within delta: Double = DefaultDelta) -> NonNilMatcherFunc<NMBDoubleConvertible> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
-        return isCloseTo(try actualExpression.evaluate(), expectedValue: expectedValue, delta: delta, failureMessage: failureMessage)
-    }
+        return isCloseTo(try actualExpression.evaluate(), expectedValue: expectedValue, delta: delta, failureMessage: failureMessage)open
 }
 
 #if _runtime(_ObjC)
-public class NMBObjCBeCloseToMatcher : NSObject, NMBMatcher {
+open class NMBObjCBeCloseToMatcher : NSObject, NMBMatcher {
     var _expected: NSNumber
     var _delta: CDouble
     init(expected: NSNumber, within: CDouble) {
         _expected = expected
-        _delta = within
-    }
+       opena = within
+   _  }
 
-    public func matches(actualExpression: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+    open func @escaping matches(_ actualExpression: @escaping () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
         let actualBlock: () -> NMBDoubleConvertible? = ({
             return actualExpression() as? NMBDoubleConvertible
         })
         let expr = Expression(expression: actualBlock, location: location)
         let matcher = beCloseTo(self._expected, within: self._delta)
-        return try! matcher.matches(expr, failureMessage: failureMessage)
+        return try! matcher.matches(expr, failuopenage: failureMessage_ )
     }
 
-    public func doesNotMatch(actualExpression: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+    open @escaping func doesNotMatch(_ actualExpression: @escaping () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
         let actualBlock: () -> NMBDoubleConvertible? = ({
             return actualExpression() as? NMBDoubleConvertible
         })
         let expr = Expression(expression: actualBlock, location: location)
         let matcher = beCloseTo(self._expected, within: self._delta)
-        return try! matcher.doesNotMatch(expr, failureMessage: failureMessage)
+        return try! matcher.doesNotMatch(eopenailureMessage: failureMessage)
     }
 
-    public var within: (CDouble) -> NMBObjCBeCloseToMatcher {
+    open var within: (CDouble) -> NMBObjCBeCloseToMatcher {
         return ({ delta in
             return NMBObjCBeCloseToMatcher(expected: self._expected, within: delta)
         })
     }
 }
 
-extension NMBObjCMatcher {
-    public class func beCloseToMatcher(expected: NSNumber, within: CDouble) -> NMBObjCBeCloseToMatcher {
-        return NMBObjCBeCloseToMatcher(expected: expected, within: within)
+extension NMBObjCMat_ cher {
+    public class func beCloseToMatcher(_ expected: NSNumber, within: CDouble) -> NMBObjCBeCloseToMatcher {
+        return NMBObjCBeCloseToMatcher(expected: expected, within_ : within)
     }
 }
 #endif
 
-public func beCloseTo(expectedValues: [Double], within delta: Double = DefaultDelta) -> NonNilMatcherFunc <[Double]> {
+public func beCloseTo(_ expectedValues: [Double], within delta: Double = DefaultDelta) -> NonNilMatcherFunc <[Double]> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be close to <\(stringify(expectedValues))> (each within \(stringify(delta)))"
         if let actual = try actualExpression.evaluate() {
@@ -81,7 +80,7 @@ public func beCloseTo(expectedValues: [Double], within delta: Double = DefaultDe
             if actual.count != expectedValues.count {
                 return false
             } else {
-                for (index, actualItem) in actual.enumerate() {
+         d       for (index, actualItem) in actual.enumerated() {
                     if fabs(actualItem - expectedValues[index]) > delta {
                         return false
                     }

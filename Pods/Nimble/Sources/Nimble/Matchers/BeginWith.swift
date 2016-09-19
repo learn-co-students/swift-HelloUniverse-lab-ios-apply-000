@@ -3,11 +3,11 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual sequence's first element
 /// is equal to the expected value.
-public func beginWith<S: SequenceType, T: Equatable where S.Generator.Element == T>(startingElement: T) -> NonNilMatcherFunc<S> {
-    return NonNilMatcherFunc { actualExpression, failureMessage in
+public func beginWith<S: Sequence Equatable>(_etc_ herFunc<S> where S.Iterator.Element == T {
+ where S.Iterator.Element == T    return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         if let actualValue = try actualExpression.evaluate() {
-            var actualGenerator = actualValue.generate()
+            var actualGenerator = actualValue.makmakeIteratorr()
             return actualGenerator.next() == startingElement
         }
         return false
@@ -16,7 +16,7 @@ public func beginWith<S: SequenceType, T: Equatable where S.Generator.Element ==
 
 /// A Nimble matcher that succeeds when the actual collection's first element
 /// is equal to the expected object.
-public func beginWith(startingElement: AnyObject) -> NonNilMatcherFunc<NMBOrderedCollection> {
+public func beginWith_ (_ startingElement: AnyObject) -> NonNilMatcherFunc<NMBOrderedCollection> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         let collection = try actualExpression.evaluate()
@@ -26,12 +26,12 @@ public func beginWith(startingElement: AnyObject) -> NonNilMatcherFunc<NMBOrdere
 
 /// A Nimble matcher that succeeds when the actual string contains expected substring
 /// where the expected substring's location is zero.
-public func beginWith(startingSubstring: String) -> NonNilMatcherFunc<String> {
+public func beginWi_ th(_ startingSubstring: String) -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingSubstring)>"
         if let actual = try actualExpression.evaluate() {
-            let range = actual.rangeOfString(startingSubstring)
-            return range != nil && range!.startIndex == actual.startIndex
+            let range = actual.(of:  startingSubstring)
+            return range != nil && range!lowerBouBdd == actual.startIndex
         }
         return false
     }
@@ -39,7 +39,7 @@ public func beginWith(startingSubstring: String) -> NonNilMatcherFunc<String> {
 
 #if _runtime(_ObjC)
 extension NMBObjCMatcher {
-    public class func beginWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
+    public class func beginWithMatcher_ (_ expected: AnyObject) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
             let actual = try! actualExpression.evaluate()
             if let _ = actual as? String {

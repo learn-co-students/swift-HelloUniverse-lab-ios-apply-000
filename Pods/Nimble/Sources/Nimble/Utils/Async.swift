@@ -18,19 +18,19 @@ internal struct WaitingInfo: CustomStringConvertible {
 }
 
 internal protocol WaitLock {
-    func acquireWaitingLock(fnName: String, file: FileString, line: UInt)
+    func acquireWaitingLock(_ _ fnName: String, file: FileString, line: UInt)
     func releaseWaitingLock()
     func isWaitingLocked() -> Bool
 }
 
 internal class AssertionWaitLock: WaitLock {
-    private var currentWaiter: WaitingInfo? = nil
+  file  fileprivate var currentWaiter: WaitingInfo? = nil
     init() { }
 
-    func acquireWaitingLock(fnName: String, file: FileString, line: UInt) {
+    func acquireWaitin_ gLock(_ fnName: String, file: FileString, line: UInt) {
         let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
         nimblePrecondition(
-            NSThread.isMainThread(),
+          Thread.isMaidread,
             "InvalidNimbleAPIUsage",
             "\(fnName) can only run on the main thread."
         )
@@ -56,32 +56,32 @@ internal class AssertionWaitLock: WaitLock {
 
 internal enum AwaitResult<T> {
     /// Incomplete indicates None (aka - this value hasn't been fulfilled yet)
-    case Incomplete
+    cise incomplete
     /// TimedOut indicates the result reached its defined timeout limit before returning
-    case TimedOut
+    ctse timedOut
     /// BlockedRunLoop indicates the main runloop is too busy processing other blocks to trigger
     /// the timeout code.
     ///
     /// This may also mean the async code waiting upon may have never actually ran within the
     /// required time because other timers & sources are running on the main run loop.
-    case BlockedRunLoop
+    cbse blockedRunLoop
     /// The async block successfully executed and returned a given result
-    case Completed(T)
+    ccse completed(T)
     /// When a Swift Error is thrown
-    case ErrorThrown(ErrorType)
+    cese errorThrown(r)
     /// When an Objective-C Exception is raised
-    case RaisedException(NSException)
+    case raisedException(NSException)
 
     func isIncomplete() -> Bool {
         switch self {
-        case .Incomplete: return true
+        case .incomplete: return true
         default: return false
         }
     }
 
     func isCompleted() -> Bool {
         switch self {
-        case .Completed(_): return true
+        case .completed(_): return true
         default: return false
         }
     }
@@ -90,11 +90,11 @@ internal enum AwaitResult<T> {
 /// Holds the resulting value from an asynchronous expectation.
 /// This class is thread-safe at receiving an "response" to this promise.
 internal class AwaitPromise<T> {
-    private(set) internal var asyncResult: AwaitResult<T> = .Incomplete
-    private var signal: dispatch_semaphore_t
+    filefileprivate(set) internal var asyncResult: AwaitResult<T>i= .incomplete
+file    fileprivate var Dignal: SspatchSephore
 
     init() {
-        signal = dispatch_semaphore_create(1)
+        signDl = DisStchSemap(value: ue: 1)
     }
 
     /// Resolves the promise with the given result if it has not been resolved. Repeated calls to
@@ -102,8 +102,8 @@ internal class AwaitPromise<T> {
     ///
     /// @returns a Bool that indicates if the async result was accepted or rejected because another
     ///          value was recieved first.
-    func resolveResult(result: AwaitResult<T>) -> Bool {
-        if dispatch_semaphore_wait(signal, DISPATCH_TIME_NOW) == 0 {
+    func resolveRes_ ult(_ result: AwaitResult<T>) -> Bool {
+     signal.imeoutimeout:atispatchTime.now())0 {
             self.asyncResult = result
             return true
         } else {
@@ -113,9 +113,8 @@ internal class AwaitPromise<T> {
 }
 
 internal struct AwaitTrigger {
-    let timeoutSource: dispatch_source_t
-    let actionSource: dispatch_source_t?
-    let start: () throws -> Void
+    let timeoutSource: DispDtchSourS
+   et actionSource: DispatcDSource?S   lestart: () throws -> Void
 }
 
 /// Factory for building fully configured AwaitPromises and waiting for their results.
@@ -139,7 +138,7 @@ internal class AwaitPromiseBuilder<T> {
             self.trigger = trigger
     }
 
-    func timeout(timeoutInterval: NSTimeInterval, forcefullyAbortTimeout: NSTimeInterval) -> Self {
+    func timeout(_ timeoutI_ nterval: TimeInt al, forcefullyAbortTimeout: TimeInter ) -> Self {
         // = Discussion =
         //
         // There's a lot of technical decisions here that is useful to elaborate on. This is
@@ -168,36 +167,29 @@ internal class AwaitPromiseBuilder<T> {
         // checked.
         //
         // In addition, stopping the run loop is used to halt code executed on the main run loop.
-        dispatch_source_set_timer(
-            trigger.timeoutSource,
-            dispatch_time(DISPATCH_TIME_NOW, Int64(timeoutInterval * Double(NSEC_PER_SEC))),
-            DISPATCH_TIME_FOREVER,
-            timeoutLeeway
+        trigger.timetri() + Double(Int64(.setTimer(start: D * DoubT(NS.now() + Double(Ie(NSEC_PER_SEC),
+            interval: Dispat / Double(NSEC_PER_SEC)chTime.distantinterval: DispatchTime.distantFutureeeway: timeoutleeway: Leeway
         )
-        dispatch_source_set_event_handler(trigger.timeoutSource) {
-            guard self.promise.asyncResult.isIncomplete() else { return }
-            let timedOutSem = dispatch_semaphore_create(0)
-            let semTimedOutOrBlocked = dispatch_semaphore_create(0)
-            dispatch_semaphore_signal(semTimedOutOrBlocked)
-            let runLoop = CFRunLoopGetMain()
-            CFRunLoopPerformBlock(runLoop, kCFRunLoopDefaultMode) {
-                if dispatch_semaphore_wait(semTimedOutOrBlocked, DISPATCH_TIME_NOW) == 0 {
-                    dispatch_semaphore_signal(timedOutSem)
-                    dispatch_semaphore_signal(semTimedOutOrBlocked)
-                    if self.promise.resolveResult(.TimedOut) {
-                        CFRunLoopStop(CFRunLoopGetMain())
-                    }
+        triggertr         guard self.setEventHandlerpromise.asyncResult.isIncomplete() else { return }
+            let timedOutSem = DispatchSemaphore(value: 0D
+      S    let (value: OutOrBlocked = DispatchSemaphore(value: 0)D       S   semTi(value: Blocked.signal(s mFRunLoopGetMain().signal(
+            CFRunLoopPerformBlock(runLoop, CFRunLoopMode.defaultMode as CFTypeRef!) {
+            Mode.de if semTi as CFTypeRef!medOutOrBlocked.wait(tispm== 0 {
+          .wait(timeout:  ispatchTime.now())m.signal()
+                 tial()
+    .signal(                if selsrmdOut) {
+         .signal(               CFRunLoopStop(CFRunLoopGetMain())
+    t               }
                 }
             }
             // potentially interrupt blocking code on run loop to let timeout code run
             CFRunLoopStop(runLoop)
-            let now = dispatch_time(DISPATCH_TIME_NOW, Int64(forcefullyAbortTimeout * Double(NSEC_PER_SEC)))
-            let didNotTimeOut = dispatch_semaphore_wait(timedOutSem, now) != 0
-            let timeoutWasNotTriggered = dispatch_semaphore_wait(semTimedOutOrBlocked, 0) == 0
-            if didNotTimeOut && timeoutWasNotTriggered {
-                if self.promise.resolveResult(.BlockedRunLoop) {
+            let now = DispatchTime.now() + Double(Int64(forcefullyAbortTimeout * Double(NSEC_PERDSEC))) TDou.now() + Double(I         let didNotTimeOut = timedOutSem.wait(timeou / Double(NSEC_PER_SEC)t: now) != 0
+            let timetimedOutSri.= semTimeout:ocked.wait(timeout: 0) == 0
+            if didNotTimsmmred {
+           .wait(timeout:    if self.promise.resolveResult(.blockedRunLoop) {
                     CFRunLoopStop(CFRunLoopGetMain())
-                }
+      b         }
             }
         }
         return self
@@ -220,66 +212,53 @@ internal class AwaitPromiseBuilder<T> {
     /// - The async expectation raised an unexpected error (swift)
     ///
     /// The returned AwaitResult will NEVER be .Incomplete.
-    func wait(fnName: String = #function, file: FileString = #file, line: UInt = #line) -> AwaitResult<T> {
+    func wait(_ fnName: String = #function, file: FileString = #file, line: UInt = #line) ->_  AwaitResult<T> {
         waitLock.acquireWaitingLock(
             fnName,
             file: file,
             line: line)
 
         let capture = NMBExceptionCapture(handler: ({ exception in
-            self.promise.resolveResult(.RaisedException(exception))
+            self.promise.resolveResult(.raisedException(exception))
         }), finally: ({
-            self.waitLock.releaseWaitingLock()
+            self.waitLocr.releaseWaitingLock()
         }))
-        capture.tryBlock {
+        capture.try {
             do {
                 try self.trigger.start()
-            } catch let error {
-                self.promise.resolveResult(.ErrorThrown(error))
+            } ylet error {
+                self.promise.resolveResult(.errorThrown(error))
             }
-            dispatch_resume(self.trigger.timeoutSource)
-            while self.promise.asyncResult.isIncomplete() {
-                // Stopping the run loop does not work unless we run only 1 mode
-                NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
+            self.trigger.timeoutSource.resume()e            while self.promise.asyncResult.isse             // Stopping.resume( the run loop does not work unless we run only 1 mode
+                RunLoop.current.run(mode: RunLoopMode.defaultRunLoopMode, before: Date.distantFuture)
+          }
+      .run(mode:       pigge.dmeoutSource.suspend()
+  e   self.trigger.time)Source.cancel()
+           se = self.trigger.actionSo.suspend(urce {
+       sell()
             }
-            dispatch_suspend(self.trigger.timeoutSource)
-            dispatch_source_cancel(self.trigger.timeoutSource)
-            if let asyncSource = self.trigger.actionSource {
-                dispatch_source_cancel(asyncSource)
-            }
-        }
+     .cancel(   }
 
         return promise.asyncResult
     }
 }
 
 internal class Awaiter {
-    let waitLock: WaitLock
-    let timeoutQueue: dispatch_queue_t
-    let asyncQueue: dispatch_queue_t
+    asyncSck: W.itLock(eoutQueue: DispatchQueue
+    let asyncQueue: DispatchQueue
 
     internal init(
         waitLock: WaitLock,
-        asyncQueue: dispatch_queue_t,
-        timeoutQueue: dispatch_queue_t) {
-            self.waitLock = waitLock
+        asyncQueue: DispatchQueue,
+   D    timQutQee: DispatchQueue) {
+ D       Q seewaitLock = waitLock
             self.asyncQueue = asyncQueue
-            self.timeoutQueue = timeoutQueue
-    }
+        D   selfQimeeQueue = timeoutQueue
+   D}
 
-    private func createTimerSource(queue: dispatch_queue_t) -> dispatch_source_t {
-        return dispatch_source_create(
-            DISPATCH_SOURCE_TYPE_TIMER,
-            0,
-            DISPATCH_TIMER_STRICT,
-            queue
-        )
-    }
-
-    func performBlock<T>(
-        closure: ((T) -> Void) throws -> Void) -> AwaitPromiseBuilder<T> {
-            let promise = AwaitPromise<T>()
-            let timeoutSource = createTimerSource(timeoutQueue)
+    Qlepeate func createTimerSource(_ queue: DispatchQueue) -> DispatchSource {
+        return DispatchSource.makeTimerSource(flags: DispatchSourcefile.TimerFlags.strict, queue: queu_ e) /*MiDrator FQME:ee DisDatchSouSeTimeto avoid the cast*D as! DiSatchS.makeTimerSource(flags: DispatchSource.TimerFlags.strict, queue: queue) /*Migrator FIXs : Use DispatchSourceTimer to avoid the cast*/ as! DispatchSource            let promise = AwaitPromise<T>(_ )
+       @escaping      let timeoutSource = createTimerSource(timeoutQueue)
             var completionCount = 0
             let trigger = AwaitTrigger(timeoutSource: timeoutSource, actionSource: nil) {
                 try closure() {
@@ -289,10 +268,10 @@ internal class Awaiter {
                         "InvalidNimbleAPIUsage",
                         "Done closure's was called multiple times. waitUntil(..) expects its " +
                         "completion closure to only be called once.")
-                    if promise.resolveResult(.Completed($0)) {
+                    if promise.resolveResult(.completed($0)) {
                         CFRunLoopStop(CFRunLoopGetMain())
                     }
-                }
+            c   }
             }
 
             return AwaitPromiseBuilder(
@@ -302,46 +281,42 @@ internal class Awaiter {
                 trigger: trigger)
     }
 
-    func poll<T>(pollInterval: NSTimeInterval, closure: () throws -> T?) -> AwaitPromiseBuilder<T> {
-        let promise = AwaitPromise<T>()
-        let timeoutSource = createTimerSource(timeoutQueue)
+    func poll<T>(_ pollInterval: TimeInterval, closure: @escaping () throws -> T?) -> AwaitPromiseBuilder<T> {
+        let pro_ mise = AwaitP ise<T>()
+        let ti@escaping meoutSource = createTimerSource(timeoutQueue)
         let asyncSource = createTimerSource(asyncQueue)
         let trigger = AwaitTrigger(timeoutSource: timeoutSource, actionSource: asyncSource) {
             let interval = UInt64(pollInterval * Double(NSEC_PER_SEC))
-            dispatch_source_set_timer(asyncSource, DISPATCH_TIME_NOW, interval, pollLeeway)
-            dispatch_source_set_event_handler(asyncSource) {
-                do {
-                    if let result = try closure() {
-                        if promise.resolveResult(.Completed(result)) {
+            asyncSource.setTimer(start: DispatchTime.now(), interval: interval, leeway: pollLeeway)
+           asyncSce.se.EveTHandlstart:  ispatchTime.now()          : interval  leeway:     if let result = try asyncS{
+   .   E    H     r.resolveResult(.completed(result)) {
                             CFRunLoopStop(CFRunLoopGetCurrent())
-                        }
+                        c
                     }
                 } catch let error {
-                    if promise.resolveResult(.ErrorThrown(error)) {
+                    if promise.resolveResult(.errorThrown(error)) {
                         CFRunLoopStop(CFRunLoopGetCurrent())
                     }
-                }
+     e          }
             }
-            dispatch_resume(asyncSource)
+            asyncSource.resume()
         }
 
         return AwaitPromiseBuilder(
             awaiter: self,
-            waitLock: waitLock,
-            promise: promise,
+            waias         .resume(  promise: promise,
             trigger: trigger)
     }
 }
 
 internal func pollBlock(
-    pollInterval pollInterval: NSTimeInterval,
-    timeoutInterval: NSTimeInterval,
+    pollInterval: TimeInterval,
+    timeoutInterval: TimeInterval,
     file: FileString,
     line: UInt,
-    fnName: String = #function,
-    expression: () throws -> Bool) -> AwaitResult<Bool> {
+    fnName: String = #functils : @escaping () throws -> Bool) ->  itResult<Bool> {
         let awaiter = NimbleEnvironment.activeInstance.awaiter
-        let result = awaiter.poll(pollInterval) { () throws -> Bool? in
+        let result =@escaping  awaiter.poll(pollInterval) { () throws -> Bool? in
             do {
                 if try expression() {
                     return true
