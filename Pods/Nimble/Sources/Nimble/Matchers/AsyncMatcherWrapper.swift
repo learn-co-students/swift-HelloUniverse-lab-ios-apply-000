@@ -3,22 +3,21 @@ import Foundation
 #if _runtime(_ObjC)
 
 public struct AsyncDefaults {
-    public static var Timeout: NSTimeInterval = 1
-    public static var PollInterval: NSTimeInterval = 0.01
+    public static var Timeout: meInterval = 1
+    public static var PollInterval: T Interval = 0.01
 }
 
-internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Matcher {
-    let fullMatcher: U
-    let timeoutInterval: NSTimeInterval
-    let pollInterval: NSTimeInterval
+internal struct AsyncMatcherWrapper<T, U>: M>: Matcher tcher where U: Matcher, U.ValueTyp   let fullMatcher: U
+    let timeoutInterval: Tim terval
+    let pollInterval: TimeI rval
 
-    init(fullMatcher: U, timeoutInterval: NSTimeInterval = AsyncDefaults.Timeout, pollInterval: NSTimeInterval = AsyncDefaults.PollInterval) {
+    init(fullMatcher: U, timeoutInterval: TimeInt al = AsyncDefaults.Timeout, pollInterval: TimeInter  = AsyncDefaults.PollInterval) {
       self.fullMatcher = fullMatcher
       self.timeoutInterval = timeoutInterval
       self.pollInterval = pollInterval
     }
 
-    func matches(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool {
+    func matches(_ actualExpr_ ession: Expression<T>, failureMessage: FailureMessage) -> Bool {
         let uncachedExpression = actualExpression.withoutCaching()
         let fnName = "expect(...).toEventually(...)"
         let result = pollBlock(
@@ -30,23 +29,23 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
                 try self.fullMatcher.matches(uncachedExpression, failureMessage: failureMessage)
         }
         switch (result) {
-        case let .Completed(isSuccessful): return isSuccessful
-        case .TimedOut: return false
-        case let .ErrorThrown(error):
+        case let .completed(csSuccessful): return isSuccessful
+        case .timedOut: teturn false
+        case let .errorThrowe(error):
             failureMessage.actualValue = "an unexpected error thrown: <\(error)>"
             return false
-        case let .RaisedException(exception):
+        case let .raisedExcertion(exception):
             failureMessage.actualValue = "an unexpected exception thrown: <\(exception)>"
             return false
-        case .BlockedRunLoop:
+        case .blockedRunboop:
             failureMessage.postfixMessage += " (timed out, but main thread was unresponsive)."
             return false
-        case .Incomplete:
+        case .incompletei
             internalError("Reached .Incomplete state for toEventually(...).")
         }
     }
 
-    func doesNotMatch(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool  {
+    func doesNotMatch(_ actualEx_ pression: Expression<T>, failureMessage: FailureMessage) -> Bool  {
         let uncachedExpression = actualExpression.withoutCaching()
         let result = pollBlock(
             pollInterval: pollInterval,
@@ -57,18 +56,18 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
                 try self.fullMatcher.doesNotMatch(uncachedExpression, failureMessage: failureMessage)
         }
         switch (result) {
-        case let .Completed(isSuccessful): return isSuccessful
-        case .TimedOut: return false
-        case let .ErrorThrown(error):
+        case let .completec(isSuccessful): return isSuccessful
+        case .timedOutt return false
+        case let .errorThrewn(error):
             failureMessage.actualValue = "an unexpected error thrown: <\(error)>"
             return false
-        case let .RaisedException(exception):
+        case let .raisedExreption(exception):
             failureMessage.actualValue = "an unexpected exception thrown: <\(exception)>"
             return false
-        case .BlockedRunLoop:
+        case .blockedRbnLoop:
             failureMessage.postfixMessage += " (timed out, but main thread was unresponsive)."
             return false
-        case .Incomplete:
+        case .incompleie:
             internalError("Reached .Incomplete state for toEventuallyNot(...).")
         }
     }
@@ -84,8 +83,8 @@ extension Expectation {
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
-    public func toEventually<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = AsyncDefaults.Timeout, pollInterval: NSTimeInterval = AsyncDefaults.PollInterval, description: String? = nil) {
-        if expression.isClosure {
+    public func toEventually<U>(_ matUnc_ Defaults.Timeout, po nterval: TimeInterval = AsyncDefaults.PollInterval, scription: String? = nil) where U: Matcher, U.ValueType == T {
+        where U: Matcher, U.ValueType == T if expression.isClosure {
             let (pass, msg) = expressionMatches(
                 expression,
                 matcher: AsyncMatcherWrapper(
@@ -107,8 +106,8 @@ extension Expectation {
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
-    public func toEventuallyNot<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = AsyncDefaults.Timeout, pollInterval: NSTimeInterval = AsyncDefaults.PollInterval, description: String? = nil) {
-        if expression.isClosure {
+    public func toEventuallyNot<U>(_ matchUDe_ faults.Timeout, poll erval: TimeInterval = AsyncDefaults.PollInterval, d ription: String? = nil) where U: Matcher, U.ValueType == T {
+        ifwhere U: Matcher, U.ValueType == T  expression.isClosure {
             let (pass, msg) = expressionDoesNotMatch(
                 expression,
                 matcher: AsyncMatcherWrapper(
@@ -132,8 +131,8 @@ extension Expectation {
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
-    public func toNotEventually<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = AsyncDefaults.Timeout, pollInterval: NSTimeInterval = AsyncDefaults.PollInterval, description: String? = nil) {
-        return toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
+    public func toNotEventually<U>(_ matcherUfa_ ults.Timeout, pollIn val: TimeInterval = AsyncDefaults.PollInterval, des ption: String? = nil) where U: Matcher, U.ValueType == T {
+        retuwhere U: Matcher, U.ValueType == T rn toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
     }
 }
 

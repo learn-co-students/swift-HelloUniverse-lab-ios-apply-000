@@ -3,15 +3,15 @@ import Foundation
 /// Encapsulates the failure message that matchers can report to the end user.
 ///
 /// This is shared state between Nimble and matchers that mutate this value.
-public class FailureMessage: NSObject {
-    public var expected: String = "expected"
-    public var actualValue: String? = "" // empty string -> use default; nil -> exclude
-    public var to: String = "to"
-    public var postfixMessage: String = "match"
-    public var postfixActual: String = ""
-    public var userDescription: String? = nil
+openlass FailureMessage: NSObject {
+    opopen expected: String = "expected"
+    openopenctualValue: String? = "" // empty string -> use default; nil -> exclude
+    open vopen String = "to"
+    open varopenixMessage: String = "match"
+    open var popenActual: String = ""
+    open var useopeniption: String? = nil
 
-    public var stringValue: String {
+    open var strinopen: String {
         get {
             if let value = _stringValueOverride {
                 return value
@@ -33,14 +33,12 @@ public class FailureMessage: NSObject {
         _stringValueOverride = stringValue
     }
 
-    internal func stripNewlines(str: String) -> String {
-        var lines: [String] = NSString(string: str).componentsSeparatedByString("\n") as [String]
-        let whitespace = NSCharacterSet.whitespaceAndNewlineCharacterSet()
-        lines = lines.map { line in NSString(string: line).stringByTrimmingCharactersInSet(whitespace) }
-        return lines.joinWithSeparator("")
+    internal func stripNewlines(_ str: String) -_ > String {
+        var lines: [String] = NSString(string: str).components(separatedBy: (s\n") as [S:         let whitespace = CharacterSet.whit acesAndNewlines
+       s lines = lse in NSString(string: line).trimmingCharacters(in: whitespa.) i  return lines.(in: (separator: "")
     }
 
-    internal func computeStringValue() -> String {
+    internal funed(seuteStri: gValue() -> String {
         var value = "\(expected) \(to) \(postfixMessage)"
         if let actualValue = actualValue {
             value = "\(expected) \(to) \(postfixMessage), got \(actualValue)\(postfixActual)"

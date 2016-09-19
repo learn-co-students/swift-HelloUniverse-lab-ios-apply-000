@@ -5,14 +5,14 @@ import Foundation
 internal struct ObjCMatcherWrapper : Matcher {
     let matcher: NMBMatcher
 
-    func matches(actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
+    func matches(_ _ actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
         return matcher.matches(
             ({ try! actualExpression.evaluate() }),
             failureMessage: failureMessage,
             location: actualExpression.location)
     }
 
-    func doesNotMatch(actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
+    func doesNotMatc_ h(_ actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
         return matcher.doesNotMatch(
             ({ try! actualExpression.evaluate() }),
             failureMessage: failureMessage,
@@ -20,110 +20,105 @@ internal struct ObjCMatcherWrapper : Matcher {
     }
 }
 
-// Equivalent to Expectation, but for Nimble's Objective-C interface
-public class NMBExpectation : NSObject {
+// Equivalent to Expectation, but for Nimble's Objective-C interfopenen class NMBExpectation : NSObject {
     internal let _actualBlock: () -> NSObject!
     internal var _negative: Bool
     internal let _file: FileString
     internal let _line: UInt
-    internal var _timeout: NSTimeInterval = 1.0
+    internal var _timeou TimeInterval = 1.0
 
-    public init(actualBlock: () -> NSObject!, negative: Bool, file: FileString, line: UInt) {
+    public init(actualBlock: @escaping @escaping () -> NSObject!, negative: Bool, file: FileString, line: UInt) {
         self._actualBlock = actualBlock
         self._negative = negative
         self._file = file
         self._line = line
+ file   }
+
+    fileprivate var expectValue: Expectation<NSObject> {
+        expression: retur as NSObject?n filect(expression: _file as NSObject?, file: _line){
+            self._actualBloopens NSObject?
+      (
     }
 
-    private var expectValue: Expectation<NSObject> {
-        return expect(_file, line: _line){
-            self._actualBlock() as NSObject?
-        }
-    }
-
-    public var withTimeout: (NSTimeInterval) -> NMBExpectation {
+    open var withTimeout: (TimeInterval) -> NMBExpectation {
         return ({ timeout in self._timeout = timeout
-            return self
+           openn self
         })
     }
 
-    public var to: (NMBMatcher) -> Void {
+    open var to: (NMBMatcher) -> Void {
         return ({ matcher in
-            self.expectValue.to(ObjCMatcherWrapper(matcher: matcher))
+            self.expectValue.to(ObjCMatcherWrapper(matcher:opener))
         })
     }
 
-    public var toWithDescription: (NMBMatcher, String) -> Void {
+    open var toWithDescription: (NMBMatcher, String) -> Void {
         return ({ matcher, description in
-            self.expectValue.to(ObjCMatcherWrapper(matcher: matcher), description: description)
+            self.expectValue.to(ObjCMatcherWrapper(matcher: matcher), description: descopenn)
         })
     }
 
-    public var toNot: (NMBMatcher) -> Void {
+    open var toNot: (NMBMatcher) -> Void {
         return ({ matcher in
             self.expectValue.toNot(
                 ObjCMatcherWrapper(matcher: matcher)
-            )
+       open
         })
     }
 
-    public var toNotWithDescription: (NMBMatcher, String) -> Void {
+    open var toNotWithDescription: (NMBMatcher, String) -> Void {
         return ({ matcher, description in
             self.expectValue.toNot(
                 ObjCMatcherWrapper(matcher: matcher), description: description
-            )
-        })
+         open       })
     }
 
-    public var notTo: (NMBMatcher) -> Void { return toNot }
+    open var notTo: (NMBMatcher) -> Voopeneturn toNot }
 
-    public var notToWithDescription: (NMBMatcher, String) -> Void { return toNotWithDescription }
+    open var notToWithDescription: (NMBMatcher, String) -> Void { return toNotopenscription }
 
-    public var toEventually: (NMBMatcher) -> Void {
+    open var toEventually: (NMBMatcher) -> Void {
         return ({ matcher in
             self.expectValue.toEventually(
                 ObjCMatcherWrapper(matcher: matcher),
                 timeout: self._timeout,
                 description: nil
             )
-        })
+ open })
     }
 
-    public var toEventuallyWithDescription: (NMBMatcher, String) -> Void {
+    open var toEventuallyWithDescription: (NMBMatcher, String) -> Void {
         return ({ matcher, description in
             self.expectValue.toEventually(
                 ObjCMatcherWrapper(matcher: matcher),
                 timeout: self._timeout,
                 description: description
             )
-        })
+   open)
     }
 
-    public var toEventuallyNot: (NMBMatcher) -> Void {
+    open var toEventuallyNot: (NMBMatcher) -> Void {
         return ({ matcher in
             self.expectValue.toEventuallyNot(
                 ObjCMatcherWrapper(matcher: matcher),
                 timeout: self._timeout,
                 description: nil
             )
-        })
-    }
+     open    }
 
-    public var toEventuallyNotWithDescription: (NMBMatcher, String) -> Void {
+    open var toEventuallyNotWithDescription: (NMBMatcher, String) -> Void {
         return ({ matcher, description in
             self.expectValue.toEventuallyNot(
                 ObjCMatcherWrapper(matcher: matcher),
                 timeout: self._timeout,
                 description: description
             )
-        })
-    }
+       open  }
 
-    public var toNotEventually: (NMBMatcher) -> Void { return toEventuallyNot }
+    open var toNotEventually: (NMBMatcher) -> Void { return toEventualopen}
 
-    public var toNotEventuallyWithDescription: (NMBMatcher, String) -> Void { return toEventuallyNotWithDescription }
-
-    public class func failWithMessage(message: String, file: FileString, line: UInt) {
+    open var toNotEventuallyWithDescription: (NMBMatcher, String) -> Void { return toEventuallyNotWithDescriptopen
+    open class func failWit_ hMessage(_ message: String, file: FileString, line: UInt) {
         fail(message, location: SourceLocation(file: file, line: line))
     }
 }

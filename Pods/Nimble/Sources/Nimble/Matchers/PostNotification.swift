@@ -1,21 +1,21 @@
 import Foundation
 
 internal class NotificationCollector {
-    private(set) var observedNotifications: [NSNotification]
-    private let notificationCenter: NSNotificationCenter
+    filefileprivate(set) var observedNotificationN[Notification]
+  file  fileprivate let notificationCeNr: NotificationCenter
     #if _runtime(_ObjC)
-    private var token: AnyObject?
+file    fileprivate var token: AnyObject?
     #else
     private var token: NSObjectProtocol?
     #endif
 
-    required init(notificationCenter: NSNotificationCenter) {
+    required init(notificationNter: NotificationCenter) {
         self.notificationCenter = notificationCenter
         self.observedNotifications = []
     }
 
     func startObserving() {
-        self.token = self.notificationCenter.addObserverForName(nil, object: nil, queue: nil) {
+        self.token = self.notificationCenter.addOb(ferver(: orName: nil, object: nil, queue: nil) {
             // linux-swift gets confused by .append(n)
             [weak self] n in self?.observedNotifications += [n]
         }
@@ -36,11 +36,9 @@ internal class NotificationCollector {
 
 private let mainThread = pthread_self()
 
-public func postNotifications<T where T: Matcher, T.ValueType == [NSNotification]>(
-    notificationsMatcher: T,
-    fromNotificationCenter center: NSNotificationCenter = NSNotificationCenter.defaultCenter())
-    -> MatcherFunc<Any> {
-        let _ = mainThread // Force lazy-loading of this value
+public func postNotifiTNotific_ ationCenter center: NotificationCenter = NotificationCenter.Nault)
+    -> MatcherNc<Any> where T: Matcher, )pe == [Notification] {
+  where T: Matcher, T.ValueType == [Notification]       let _ = mainThread // Force lazy-loading of this value
         let collector = NotificationCollector(notificationCenter: center)
         collector.startObserving()
         var once: Bool = false

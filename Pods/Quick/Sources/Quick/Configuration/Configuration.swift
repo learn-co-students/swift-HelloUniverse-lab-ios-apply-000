@@ -4,13 +4,13 @@ import Foundation
     A closure that temporarily exposes a Configuration object within
     the scope of the closure.
 */
-public typealias QuickConfigurer = (configuration: Configuration) -> ()
+public typealias QuickConfigurer = (_ _ configuration: Configuration) -> ()
 
 /**
     A closure that, given metadata about an example, returns a boolean value
     indicating whether that example should be run.
 */
-public typealias ExampleFilter = (example: Example) -> Bool
+public typealias ExampleFilter =_  (_ example: Example) -> Bool
 
 /**
     A configuration encapsulates various options you can use
@@ -49,7 +49,7 @@ final public class Configuration: NSObject {
                        whether that example should be included in the examples
                        that are run.
     */
-    public func include(filter: ExampleFilter) {
+    public func incl_ ude(_ fi@escaping lter: @escaping ExampleFilter) {
         inclusionFilters.append(filter)
     }
 
@@ -63,7 +63,7 @@ final public class Configuration: NSObject {
                        whether that example should be excluded from the examples
                        that are run.
     */
-    public func exclude(filter: ExampleFilter) {
+    publ_ ic func @escaping exclude(_ filter: @escaping ExampleFilter) {
         exclusionFilters.append(filter)
     }
 
@@ -73,8 +73,8 @@ final public class Configuration: NSObject {
         prior to.
     */
 #if _runtime(_ObjC)
-    @objc(beforeEachWithMetadata:)
-    public func beforeEach(closure: BeforeExampleWithMetadataClosure) {
+    @objc(beforeEachWithMetadata:)_ 
+    public func beforeEach(_ closure: BeforeExampleWithMetadataClosure) {
         exampleHooks.appendBefore(closure)
     }
 #else
@@ -99,8 +99,8 @@ final public class Configuration: NSObject {
 
         - parameter closure: The closure to be executed before each example
                         in the test suite.
-    */
-    public func beforeEach(closure: BeforeExampleClosure) {
+    _ */
+    public func beforeEach(_ closure: BeforeExampleClosure) {
         exampleHooks.appendBefore(closure)
     }
 
@@ -110,8 +110,8 @@ final public class Configuration: NSObject {
         run after.
     */
 #if _runtime(_ObjC)
-    @objc(afterEachWithMetadata:)
-    public func afterEach(closure: AfterExampleWithMetadataClosure) {
+    @objc(afterEachWithMetad_ ata:)
+    public func afterEach(_ closure: AfterExampleWithMetadataClosure) {
         exampleHooks.appendAfter(closure)
     }
 #else
@@ -135,27 +135,27 @@ final public class Configuration: NSObject {
         will be executed in the order they're defined.
 
         - parameter closure: The closure to be executed before each example
-                        in the test suite.
+                        in the test suite._ 
     */
-    public func afterEach(closure: AfterExampleClosure) {
+    public func afterEach(_ closure: AfterExampleClosure) {
         exampleHooks.appendAfter(closure)
     }
 
     /**
         Like Quick.DSL.beforeSuite, this configures Quick to execute
         the given closure prior to any and all examples that are run.
-        The two methods are functionally equivalent.
+        The two methods are functionally equivalent._ 
     */
-    public func beforeSuite(closure: BeforeSuiteClosure) {
+    public func beforeSuite(_ closure: BeforeSuiteClosure) {
         suiteHooks.appendBefore(closure)
     }
 
     /**
         Like Quick.DSL.afterSuite, this configures Quick to execute
         the given closure after all examples have been run.
-        The two methods are functionally equivalent.
+        The two methods are functionally equivale_ nt.
     */
-    public func afterSuite(closure: AfterSuiteClosure) {
+    public func afterSuite(_ closure: AfterSuiteClosure) {
         suiteHooks.appendAfter(closure)
     }
 }

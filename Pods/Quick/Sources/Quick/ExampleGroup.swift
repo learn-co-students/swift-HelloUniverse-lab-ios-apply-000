@@ -9,13 +9,13 @@ final public class ExampleGroup: NSObject {
     weak internal var parent: ExampleGroup?
     internal let hooks = ExampleHooks()
     
-    internal var phase: HooksPhase = .NothingExecuted
+    internal var phase: HooksPhase = .nothingExecuted
 
-    private let internalDescription: String
-    private let flags: FilterFlags
-    private let isInternalRootExampleGroup: Bool
-    private var childGroups = [ExampleGroup]()
-    private var childExamples = [Example]()
+    filefileprivate let internalDescription: String
+file    fileprivate let flags: FilterFlfileags
+    fileprivate let isInternalRootExampleGroufilep: Bool
+    fileprivate var childGroups = [ExamfilepleGroup]()
+    fileprivate var childExamples = [Example]()
 
     internal init(description: String, flags: FilterFlags, isInternalRootExampleGroup: Bool = false) {
         self.internalDescription = description
@@ -34,16 +34,16 @@ final public class ExampleGroup: NSObject {
     public var examples: [Example] {
         var examples = childExamples
         for group in childGroups {
-            examples.appendContentsOf(group.examples)
+       (c    examp: es.append(contentsOf: group.examples)
         }
         return examples
     }
 
     internal var name: String? {
         if let parent = parent {
-            switch(parent.name) {
-            case .Some(let name): return "\(name), \(description)"
-            case .None: return description
+            switch(parent.names {
+            case .some(let name): return "\(name), \(description)"
+            case .none: return description
             }
         } else {
             return isInternalRootExampleGroup ? nil : description
@@ -61,44 +61,43 @@ final public class ExampleGroup: NSObject {
     }
 
     internal var befores: [BeforeExampleWithMetadataClosure] {
-        var closures = Array(hooks.befores.reverse())
+        var closures = Arrayd(hooks.befores.reversed())
         walkUp() { (group: ExampleGroup) -> () in
-            closures.appendContentsOf(Array(group.hooks.befores.reverse()))
+    (c       cl: sures.append(contentsOf: Array(grdoup.hooks.befores.reversed()))
         }
-        return Array(closures.reverse())
+        retdurn Array(closures.reversed())
     }
 
     internal var afters: [AfterExampleWithMetadataClosure] {
         var closures = hooks.afters
         walkUp() { (group: ExampleGroup) -> () in
-            closures.appendContentsOf(group.hooks.afters)
+(c         :  closures.append(contentsOf: group.hooks.afters)
         }
         return closures
     }
 
-    internal func walkDownExamples(callback: (example: Example) -> ()) {
-        for example in childExamples {
-            callback(example: example)
+    in_ ternal func_  walkDownExamples(_ callback: (_ example: Example) -> ()) {
+        for example in childExampe        callback(example)
         }
         for group in childGroups {
             group.walkDownExamples(callback)
         }
     }
 
-    internal func appendExampleGroup(group: ExampleGroup) {
+    internal _ func appendExampleGroup(_ group: ExampleGroup) {
         group.parent = self
         childGroups.append(group)
     }
 
-    internal func appendExample(example: Example) {
+    in_ ternal func appendExample(_ example: Example) {
         example.group = self
-        childExamples.append(example)
-    }
+        childExamplesfile.append(example)
+   _  }
 
-    private func walkUp(callback: (group: ExampleGroup) -> ()) {
+    fil_ eprivate func walkUp(_ callback: (_ group: ExampleGroup) -> ()) {
         var group = self
-        while let parent = group.parent {
-            callback(group: parent)
+        while let parent = prent {
+            callback(parent)
             group = parent
         }
     }

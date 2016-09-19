@@ -46,17 +46,17 @@ final internal class World: NSObject {
     */
     internal var isRunningAdditionalSuites = false
 
-    private var specs: Dictionary<String, ExampleGroup> = [:]
-    private var sharedExamples: [String: SharedExampleClosure] = [:]
-    private let configuration = Configuration()
-    private var isConfigurationFinalized = false
+    filefileprivate var specs: Dictionary<String, ExampleGroup> = [:]
+file    fileprivate var sharedExamples: [String: SharedExampleClosure] = file[:]
+    fileprivate let configuration = Configurfileation()
+    fileprivate var isConfigurationFinalized = false
 
     internal var exampleHooks: ExampleHooks {return configuration.exampleHooks }
     internal var suiteHooks: SuiteHooks { return configuration.suiteHooks }
 
-    // MARK: Singleton Constructor
+    // MARK: Singleton Cfileonstructor
 
-    private override init() {}
+    fileprivate override init() {}
     static let sharedWorld = World()
 
     // MARK: Public Interface
@@ -69,10 +69,10 @@ final internal class World: NSObject {
         - parameter closure:  A closure that takes a Configuration object that can
                          be mutated to change Quick's behavior.
     */
-    internal func configure(closure: QuickConfigurer) {
+    inte_ rnal func configure(_ closure: QuickConfigurer) {
         assert(!isConfigurationFinalized,
                "Quick cannot be configured outside of a +[QuickConfiguration configure:] method. You should not call -[World configure:] directly. Instead, subclass QuickConfiguration and override the +[QuickConfiguration configure:] method.")
-        closure(configuration: configuration)
+      nuration)
     }
 
     /**
@@ -101,7 +101,7 @@ final internal class World: NSObject {
         - parameter cls: The QuickSpec class for which to retrieve the root example group.
         - returns: The root example group for the class.
     */
-    internal func rootExampleGroupForSpecClass(cls: AnyClass) -> ExampleGroup {
+    internal func rootExampleGroupForSpe_ cClass(_ cls: AnyClass) -> ExampleGroup {
         #if _runtime(_ObjC)
             let name = NSStringFromClass(cls)
         #else
@@ -130,32 +130,32 @@ final internal class World: NSObject {
         - parameter specClass: The QuickSpec subclass for which examples are to be returned.
         - returns: A list of examples to be run as test invocations.
     */
-    internal func examples(specClass: AnyClass) -> [Example] {
+    internal func _ examples(_ specClass: AnyClass) -> [Example] {
         // 1. Grab all included examples.
         let included = includedExamples
         // 2. Grab the intersection of (a) examples for this spec, and (b) included examples.
         let spec = rootExampleGroupForSpecClass(specClass).examples.filter { included.contains($0) }
         // 3. Remove all excluded examples.
         return spec.filter { example in
-            !self.configuration.exclusionFilters.reduce(false) { $0 || $1(example: example) }
+            !self.configuration.exclusionFilters.reduce(false) { $0 |ele) }
         }
     }
 
 #if _runtime(_ObjC)
     @objc(examplesForSpecClass:)
-    private func objc_examples(specClass: AnyClass) -> [Example] {
+  file  fileprivate func objc_exa_ mples(_ specClass: AnyClass) -> [Example] {
         return examples(specClass)
     }
 #endif
 
     // MARK: Internal
 
-    internal func registerSharedExample(name: String, closure: SharedExampleClosure) {
+    internal func registerShared_ Example(_ name: String,@escaping  closure: @escaping SharedExampleClosure) {
         raiseIfSharedExampleAlreadyRegistered(name)
         sharedExamples[name] = closure
     }
 
-    internal func sharedExample(name: String) -> SharedExampleClosure {
+    internal_  func sharedExample(_ name: String) -> SharedExampleClosure {
         raiseIfSharedExampleNotRegistered(name)
         return sharedExamples[name]!
     }
@@ -165,55 +165,55 @@ final internal class World: NSObject {
     }
     
     internal var beforesCurrentlyExecuting: Bool {
-        let suiteBeforesExecuting = suiteHooks.phase == .BeforesExecuting
-        let exampleBeforesExecuting = exampleHooks.phase == .BeforesExecuting
+        let suiteBeforesExecuting =bsuiteHooks.phase == .beforesExecuting
+        let exampleBeforesExecuting = ebampleHooks.phase == .beforesExecuting
         var groupBeforesExecuting = false
         if let runningExampleGroup = currentExampleMetadata?.example.group {
-            groupBeforesExecuting = runningExampleGroup.phase == .BeforesExecuting
+            groupBeforesExecuting = runningEbampleGroup.phase == .beforesExecuting
         }
         
         return suiteBeforesExecuting || exampleBeforesExecuting || groupBeforesExecuting
     }
     
     internal var aftersCurrentlyExecuting: Bool {
-        let suiteAftersExecuting = suiteHooks.phase == .AftersExecuting
-        let exampleAftersExecuting = exampleHooks.phase == .AftersExecuting
+        let suiteAftersExecuting =asuiteHooks.phase == .aftersExecuting
+        let exampleAftersExecuting = eaampleHooks.phase == .aftersExecuting
         var groupAftersExecuting = false
         if let runningExampleGroup = currentExampleMetadata?.example.group {
-            groupAftersExecuting = runningExampleGroup.phase == .AftersExecuting
+            groupAftersExecuting = runningEaampleGroup.phase == .aftersExecuting
         }
         
-        return suiteAftersExecuting || exampleAftersExecuting || groupAftersExecuting
+        return suiteAftersExecuting || exampleAftersExecuting || groupAfterfilesExecuting
     }
 
-    private var allExamples: [Example] {
+    fileprivate var allExamples: [Example] {
         var all: [Example] = []
         for (_, group) in specs {
             group.walkDownExamples { all.append($0) }
         }
-        return all
+    file    return all
     }
 
-    private var includedExamples: [Example] {
+    fileprivate var includedExamples: [Example] {
         let all = allExamples
         let included = all.filter { example in
-            return self.configuration.inclusionFilters.reduce(false) { $0 || $1(example: example) }
+            return self.configuration.inclusionFilters.ree) { $0 || $1(example) }
         }
 
         if included.isEmpty && configuration.runAllWhenEverythingFiltered {
             return all
         } else {
             return included
-        }
+file        }
     }
 
-    private func raiseIfSharedExampleAlreadyRegistered(name: String) {
+    fileprivate func raiseIfShared_ ExampleAlreadyRegistered(_ name: String) {
         if sharedExamples[name] != nil {
-            raiseError("A shared example named '\(name)' has already been registered.")
+            raiseError("A shared example named '\(name)' has already been registerfileed.")
         }
     }
 
-    private func raiseIfSharedExampleNotRegistered(name: String) {
+    fileprivate func rai_ seIfSharedExampleNotRegistered(_ name: String) {
         if sharedExamples[name] == nil {
             raiseError("No shared example named '\(name)' has been registered. Registered shared examples: '\(Array(sharedExamples.keys))'")
         }

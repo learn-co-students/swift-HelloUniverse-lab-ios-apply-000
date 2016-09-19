@@ -4,39 +4,36 @@
 final internal class ExampleHooks {
     internal var befores: [BeforeExampleWithMetadataClosure] = []
     internal var afters: [AfterExampleWithMetadataClosure] = []
-    internal var phase: HooksPhase = .NothingExecuted
+    internal var phase: HooksPhase = .nothingExecuted
 
-    internal func appendBefore(closure: BeforeExampleWithMetadataClosure) {
+    internal func appendBefore(_ _ closure@escaping : @escaping BeforeExampleWithMetadataClosure) {
         befores.append(closure)
     }
 
-    internal func appendBefore(closure: BeforeExampleClosure) {
+    internal func a_ ppendBefo@escaping re(_ closure: @escaping BeforeExampleClosure) {
         befores.append { (exampleMetadata: ExampleMetadata) in closure() }
     }
 
-    internal func appendAfter(closure: AfterExampleWithMetadataClosure) {
+    in_ ternal fu@escaping nc appendAfter(_ closure: @escaping AfterExampleWithMetadataClosure) {
         afters.append(closure)
+ _    }
+
+   @escaping  internal func appendAfter(_ closure: @escaping AfterExampleClosure) {
+        afters.append { (exampleMetadata: ExampleMetadata) in clos_ ure() }
     }
 
-    internal func appendAfter(closure: AfterExampleClosure) {
-        afters.append { (exampleMetadata: ExampleMetadata) in closure() }
-    }
-
-    internal func executeBefores(exampleMetadata: ExampleMetadata) {
-        phase = .BeforesExecuting
-        for before in befores {
-            before(exampleMetadata: exampleMetadata)
-        }
+    internal func executeBefores(_ exabpleMetadata: ExampleMetadata) {
+        phase = .beforesExecuting
+        for befa           before(exampleMetadata)
+   b    }
         
-        phase = .BeforesFinished
+        phase = .beforesFinished
     }
-
-    internal func executeAfters(exampleMetadata: ExampleMetadata) {
-        phase = .AftersExecuting
-        for after in afters {
-            after(exampleMetadata: exampleMetadata)
+_ 
+    internal func executeAfters(_ exampleMetadata: EaampleMetadata) {
+        phase = .aftersExecuting
+        for after in aftersaer(exampleMetadata)
         }
-
-        phase = .AftersFinished
+a        phase = .aftersFinished
     }
 }

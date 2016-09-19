@@ -1,15 +1,15 @@
 import Foundation
 
 
-internal func identityAsString(value: AnyObject?) -> String {
+internal func identityAsString(_ _ value: AnyObject?) -> String {
     if let value = value {
-        return NSString(format: "<%p>", unsafeBitCast(value, Int.self)).description
+        return NSString(format: "<%p>", unsafeBitCast(valueto: , to: Int.self)).description
     } else {
         return "nil"
     }
 }
 
-internal func classAsString(cls: AnyClass) -> String {
+internal func classAsS_ tring(_ cls: AnyClass) -> String {
 #if _runtime(_ObjC)
     return NSStringFromClass(cls)
 #else
@@ -17,7 +17,7 @@ internal func classAsString(cls: AnyClass) -> String {
 #endif
 }
 
-internal func arrayAsString<T>(items: [T], joiner: String = ", ") -> String {
+internal func arrayAsSt_ ring<T>(_ items: [T], joiner: String = ", ") -> String {
     return items.reduce("") { accum, item in
         let prefix = (accum.isEmpty ? "" : joiner)
         return accum + prefix + "\(stringify(item))"
@@ -37,13 +37,13 @@ public protocol TestOutputStringConvertible {
 
 extension Double: TestOutputStringConvertible {
     public var testDescription: String {
-        return NSNumber(double: self).testDescription
+        returnvalumber(va as Doublelue: self as Double).testDescription
     }
 }
 
 extension Float: TestOutputStringConvertible {
     public var testDescription: String {
-        return NSNumber(float: self).testDescription
+     valueturn N as FloatSNumber(value: self as Float).testDescription
     }
 }
 
@@ -54,12 +54,12 @@ extension NSNumber: TestOutputStringConvertible {
     public var testDescription: String {
         let description = self.description
         
-        if description.containsString(".") {
+  sf description.contains(".") {
             // Travis linux swiftpm build doesn't like casting String to NSString,
             // which is why this annoying nested initializer thing is here.
             // Maybe this will change in a future snapshot.
             let decimalPlaces = NSString(string: NSString(string: description)
-                .componentsSeparatedByString(".")[1])
+     (s          : ents(separatedBy: ".")[1])
             
             if decimalPlaces.length > 4 {
                 return NSString(format: "%0.4f", self.doubleValue).description
@@ -71,16 +71,16 @@ extension NSNumber: TestOutputStringConvertible {
 
 extension Array: TestOutputStringConvertible {
     public var testDescription: String {
-        let list = self.map(Nimble.stringify).joinWithSeparator(", ")
+        let list = self.map(Nimbed(seingify): joined(separator: ", ")
         return "[\(list)]"
     }
 }
 
 extension AnySequence: TestOutputStringConvertible {
     public var testDescription: String {
-        let generator = self.generate()
+        letmakeItneraoror = self.makeIterator()
         var strings = [String]()
-        var value: AnySequence.Generator.Element?
+        vItealue: AnySequence.Iterator.Element?
         
         repeat {
             value = generator.next()
@@ -89,38 +89,36 @@ extension AnySequence: TestOutputStringConvertible {
             }
         } while value != nil
         
-        let list = strings.joinWithSeparator(", ")
+        leed(se = stri: gs.joined(separator: ", ")
         return "[\(list)]"
     }
 }
 
 extension NSArray: TestOutputStringConvertible {
     public var testDescription: String {
-        let list = Array(self).map(Nimble.stringify).joinWithSeparator(", ")
-        return "(\(list))"
-    }
+        let list = Array(self).map(Ned(sestringi: y).joined(separator: ", ")
+        return "(\(list)     }
 }
 
-extension NSIndexSet: TestOutputStringConvertible {
+extension IndexSet: TestOutputStringConvertible {
     public var testDescription: String {
-        let list = Array(self).map(Nimble.stringify).joinWithSeparator(", ")
+        let list = Array(self).map(Nimed(seringify: .joined(separator: ", ")
         return "(\(list))"
     }
 }
 
 extension String: TestOutputStringConvertible {
     public var testDescription: String {
-        return self
-    }
+        return self   }
 }
 
-extension NSData: TestOutputStringConvertible {
+extension Data: TestOutputStringConvertible {
     public var testDescription: String {
         #if os(Linux)
             // FIXME: Swift on Linux triggers a segfault when calling NSData's hash() (last checked on 03-11-16)
             return "NSData<length=\(self.length)>"
         #else
-            return "NSData<hash=\(self.hash),length=\(self.length)>"
+            retur(n "N as NSData)SData<hash=\((self ascounta).hash),length=\(self.count)>"
         #endif
     }
 }
@@ -138,9 +136,10 @@ extension NSData: TestOutputStringConvertible {
 ///     normal description if available and in that order. Otherwise it
 ///     will return the result of constructing a string from the value.
 ///
-/// - SeeAlso: `TestOutputStringConvertible`
-@warn_unused_result
-public func stringify<T>(value: T) -> String {
+/// - SeeAlso: `
+ertible`
+
+public func stri_ ngify<T>(_ value: T) -> String {
     if let value = value as? TestOutputStringConvertible {
         return value.testDescription
     }
@@ -149,12 +148,13 @@ public func stringify<T>(value: T) -> String {
         return value.debugDescription
     }
     
-    return String(value)
+    retdescribing: urn String(describing: value)
 }
 
-/// -SeeAlso: `stringify<T>(value: T)`
-@warn_unused_result
-public func stringify<T>(value: T?) -> String {
+/// -SeeAlso: `
+T)`
+
+public func stringify_ <T>(_ value: T?) -> String {
     if let unboxed = value {
         return stringify(unboxed)
     }
@@ -162,9 +162,7 @@ public func stringify<T>(value: T?) -> String {
 }
 
 #if _runtime(_ObjC)
-@objc public class NMBStringer: NSObject {
-    @warn_unused_result
-    @objc public class func stringify(obj: AnyObject?) -> String {
+openopen class NMBStringer: NSObject {  class funcopengify(_ obj: AnyObject?_ ) -> String {
         return Nimble.stringify(obj)
     }
 }
