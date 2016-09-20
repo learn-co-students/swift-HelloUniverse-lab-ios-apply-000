@@ -10,6 +10,9 @@ import Foundation
 
 class Greeting {
     
-    // Implement your function here
+    func helloUniverse() -> Sting {
+        return "Hello Universe!"
+    }
+    
     
 }
