@@ -10,7 +10,7 @@ import Foundation
 
 class Greeting {
     
-    func helloUniverse() -> Sting {
+    func helloUniverse() -> String {
         return "Hello Universe!"
     }
     
