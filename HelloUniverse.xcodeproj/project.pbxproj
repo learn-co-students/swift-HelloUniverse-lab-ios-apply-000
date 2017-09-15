@@ -93,13 +93,13 @@
 		5B9855011D528BDA008997ED /* HelloUniverse */ = {
 			isa = PBXGroup;
 			children = (
+				5B9855241D528D02008997ED /* Greeting.swift */,
 				5B9855021D528BDA008997ED /* AppDelegate.swift */,
 				5B9855041D528BDA008997ED /* ViewController.swift */,
 				5B9855061D528BDA008997ED /* Main.storyboard */,
 				5B9855091D528BDA008997ED /* Assets.xcassets */,
 				5B98550B1D528BDA008997ED /* LaunchScreen.storyboard */,
 				5B98550E1D528BDA008997ED /* Info.plist */,
-				5B9855241D528D02008997ED /* Greeting.swift */,
 			);
 			path = HelloUniverse;
 			sourceTree = "<group>";
